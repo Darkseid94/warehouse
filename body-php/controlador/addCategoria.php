@@ -11,7 +11,7 @@ if(isset($_POST["enviar"])) {
         //ejecusion de la consulta
        if(mysqli_query($conexion, $consulta)){
             $mensaje2="Categoria ".$categoria." agregado correctamente";
-           Header("Location: ../../body-admin/productos.php?mensaje2=".$mensaje2."");
+           Header("Location: ../../body-admin/categoria.php?mensaje2=".$mensaje2."");
         }
         $conexion->close();  //serramos mysql
 

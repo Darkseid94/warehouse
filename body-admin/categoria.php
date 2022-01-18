@@ -89,11 +89,11 @@
                         <div class="card">
                             <div class="header">
                                 <?php                 
-                                    if(isset($_GET["mensaje2"])){
-                                        $mensaje2=$_GET["mensaje2"];
+                                    if(isset($_GET["mensaje3"])){
+                                        $mensaje3=$_GET["mensaje3"];
                                              echo "  
                                                 <div class='alert alert-info'>
-                                                    <center><a href='#' class='alert-link' >".$mensaje2."</a></center>
+                                                    <center><a href='#' class='alert-link' >".$mensaje3."</a></center>
                                                 </div>";
                                     }
                                 ?>
@@ -144,11 +144,11 @@
                                         echo "<td>".$fila['categoria']."</td>";
                                         
                                         echo "<td>
-                                                <a href='modP.php?id_caegoria=".$fila['id_categoria']."&categoria=".$fila['categoria']."' >
+                                                <a href='modC.php?id_categoria=".$fila['id_categoria']."&categoria=".$fila['categoria']."' >
                                                     <i class='pe-7s-pen'></i>
                                                 </a>
                                                 <i>|</i>
-                                                <a href='../body-php/controlador/deleteP.php?id_categoria=".$fila['id_categoria']."'>
+                                                <a href='../body-php/controlador/deleteC.php?id_categoria=".$fila['id_categoria']."&categoria=".$fila['categoria']."'>
                                                     <i class='pe-7s-trash'></i>
                                                 </a>
                                             </td>";
