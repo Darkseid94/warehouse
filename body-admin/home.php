@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="../css/estilos.css">
 
 </head>
-<body>
+<body class="fondo2">
 
 <div class="wrapper">
 

@@ -35,7 +35,7 @@
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
-<body>
+<body class="fondo2">
 
 <div class="wrapper">
     <?php require("menuVertical.php");?>
@@ -57,7 +57,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Categoria</label>
-                                                <select name="clienteV" class="form-control">
+                                                <select name="categoria" class="form-control">
                                                 <?php
                                                     require("../body-php/controlador/bd.php");
                                                     $consulta = "SELECT * FROM categoria ORDER BY categoria ASC";
@@ -82,7 +82,8 @@
                                             <div class="form-group">
                                                 <label>Hotel</label>
                                                 <select name="hotel" class="form-control">
-                                                    <option value=''></option>
+                                                    <option value='1'>1</option>
+                                                    <option value='2'>2</option>
                                                 </select>
                                                 </div>
                                         </div>
@@ -174,17 +175,16 @@
                             <div class="content table-full-width">
                                 <table class="table table-hover table-striped">
                                     <thead>
-                                    	<th>Foto</th>
                                     	<th>Nombre</th>
-                                    	<th>Precio</th>
-                                    	<th>Descripción</th>
-                                        <th>Fecha de Modificación</th>
-                                        <?php
-                                            if($_SESSION["tipo1"]==1){
-                                                echo "<th>Acción</th>";
-                                            }
-                                        
-                                        ?>
+                                    	<th>Numero de serie</th>
+                                    	<th>Marca</th>
+                                    	<th>Modelo</th>
+                                        <th>Estado</th>
+                                        <th>Hotel</th>
+                                        <th>Categoria</th>
+                                        <th>Fecha de Registro</th>
+                                        <th>Usuario</th>
+                                        <th>Accion</th>
                                     </thead>
                                     <tbody>
                                     <?php
@@ -195,42 +195,40 @@
 								        $auxBuscador=$_GET['buscador'];
 							        }
 
-                                    $consulta = "SELECT * FROM productos where 
-                                                    nombreP REGEXP '$auxBuscador' 
-                                                or 
-                                                    precioP REGEXP '$auxBuscador' 
-                                                or 
-                                                    fechaMod REGEXP '$auxBuscador' 
-                                                ORDER BY nombreP ASC ";
+                                    $consulta = "SELECT p.nombreP,p.serie,p.marca,p.modelo,c.categoria,p.estado,
+                                                p.hotel,p.fechaR,u.nombreU
+                                                from productos p
+                                                INNER JOIN categoria c 
+                                                    on p.fk_categoria=c.id_categoria
+                                                INNER JOIN user u 
+                                                    on p.fk_usuarioR=u.id_user
+                                                WHERE p.nombreP REGEXP '$auxBuscador'
+                                                ORDER BY nombreP ASC";
                                                 
                                     $resultado=$conexion->query($consulta);
 
                                     while($fila = $resultado->fetch_array()){
                                         
-                                        echo "<tr>
-                                                <td>
-                                                    <div class='logo'>
-                                                        <div class='form-group text-center pt-3'>
-                                                            <img src='assets/img/".$fila['fotoP']."' class='imghomeletras' />
-                                                        </div>
-                                                    </div>
-                                                </td>"; 
+                                        echo "<tr>";
 
                                         echo "<td>".$fila['nombreP']."</td>";  
-                                        echo "<td>$ ".$fila['precioP']."</td>"; 
-                                        echo "<td>".$fila['descriP']."</td>"; 
-                                        echo "<td>".$fila['fechaMod']."</td>"; 
-                                        if($_SESSION["tipo1"]==1){
+                                        echo "<td>".$fila['serie']."</td>"; 
+                                        echo "<td>".$fila['marca']."</td>";
+                                        echo "<td>".$fila['modelo']."</td>";
+                                        echo "<td>".$fila['estado']."</td>";
+                                        echo "<td>".$fila['hotel']."</td>";
+                                        echo "<td>".$fila['categoria']."</td>";
+                                        echo "<td>".$fila['fechaR']."</td>";
+                                        echo "<td>".$fila['nombreU']."</td>";
                                         echo "<td>
-                                                <a href='modP.php?id_producto=".$fila['id_producto']."&nombreP=".$fila['nombreP']."&precioP=".$fila['precioP']."&descriP=".$fila['descriP']."&fotoP=".$fila['fotoP']."' >
+                                                <a href='' >
                                                     <i class='pe-7s-pen'></i>
                                                 </a>
                                                 <i>|</i>
-                                                <a href='../body-php/controlador/deleteP.php? id_producto=".$fila['id_producto']."&nombreP=".$fila['nombreP']."&fotoP=".$fila['fotoP']."'>
+                                                <a href=''>
                                                     <i class='pe-7s-trash'></i>
                                                 </a>
                                             </td>";
-                                        }
                                         echo "</tr>"; 
 
                                     }

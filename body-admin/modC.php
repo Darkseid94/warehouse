@@ -35,7 +35,7 @@
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/estilos.css">
 </head>
-<body>
+<body class="fondo2">
 
 <div class="wrapper">
     <?php require("menuVertical.php");?>
