@@ -20,8 +20,8 @@ if(isset($_POST["enviar"])) {
                     ('$nameP','$hotel','$marca','$ns','$fechaR','$categoria','$modelo','$estado','$id_user')";//insercion a la base de datos
         //ejecusion de la consulta
        if(mysqli_query($conexion, $consulta)){
-          // $mensaje="Producto vendido correctamente ";
-          // Header("Location: ../../body-admin/ventas.php?mensaje=".$mensaje."");
+          $mensaje="Producto agregado correctamente";
+          Header("Location: ../../body-admin/productos.php?mensaje=".$mensaje."");
         }
         $conexion->close();  //serramos mysql
 

@@ -33,6 +33,13 @@
                         <p>Categoria</p>
                     </a>
                 </li>
+
+                <li class='active-pro'>
+                    <a href='usuarios.php'>
+                        <i class='pe-7s-user'></i>
+                        <p>Usuarios</p>
+                    </a>
+                </li>
                 
             </ul>
     	</div>

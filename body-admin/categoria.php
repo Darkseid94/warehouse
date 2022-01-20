@@ -118,12 +118,11 @@
                                     
                             <div class="content table-full-width">
                                 <table class="table table-hover table-striped">
-                                    <thead>
-                                    	<th>Categoria</th>
-                                        <th>Acción</th>
-                                            
-                                    </thead>
-                                    <tbody>
+                                <tbody>
+                                    	<td>Categoria</td>
+                                        <td>Acción</td>
+                                    
+                                    
                                     <?php
                                     require("../body-php/controlador/bd.php");
                                     
@@ -140,6 +139,7 @@
                                     $resultado=$conexion->query($consulta);
 
                                     while($fila = $resultado->fetch_array()){
+                                        echo "<tr>";
 
                                         echo "<td>".$fila['categoria']."</td>";
                                         
@@ -152,6 +152,7 @@
                                                     <i class='pe-7s-trash'></i>
                                                 </a>
                                             </td>";
+
                                         echo "</tr>"; 
 
                                     }

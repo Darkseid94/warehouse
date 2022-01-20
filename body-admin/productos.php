@@ -82,8 +82,8 @@
                                             <div class="form-group">
                                                 <label>Hotel</label>
                                                 <select name="hotel" class="form-control">
-                                                    <option value='1'>1</option>
-                                                    <option value='2'>2</option>
+                                                    <option value='Hotel trancilbania'>Hotel trancilbania</option>
+                                                    <option value='Hotel xxxxx'>Hotel xxxxx</option>
                                                 </select>
                                                 </div>
                                         </div>
@@ -123,8 +123,8 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                             <?php                 
-                                                if(isset($_GET["mensaje"])){
-                                                    $mensaje=$_GET["mensaje"];
+                                                if(isset($_GET["mensaje3"])){
+                                                    $mensaje=$_GET["mensaje3"];
                                                     echo "  
                                                     <div class='alert alert-info'>
                                                         <center><a href='#' class='alert-link' >".$mensaje."</a></center>
@@ -136,108 +136,6 @@
                                     </div>
                                     
                                 </form>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Productos</h4>
-                                <?php                 
-                                    if(isset($_GET["mensaje2"])){
-                                        $mensaje2=$_GET["mensaje2"];
-                                             echo "  
-                                                <div class='alert alert-info'>
-                                                    <center><a href='#' class='alert-link' >".$mensaje2."</a></center>
-                                                </div>";
-                                    }
-                                ?>
-                            </div>
-                            <div class="content">
-                            <div class="row">
-                            <form  method='GET'>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" name="buscador" class="form-control" placeholder="Introduce aquí el producto que deseas buscar">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-secondary btn-fill pull-left">Buscar</button>
-                                    </div>
-                                </div>
-                            </form>
-                            </div>
-                            </div>
-                            
-                                    
-                            <div class="content table-full-width">
-                                <table class="table table-hover table-striped">
-                                    <thead>
-                                    	<th>Nombre</th>
-                                    	<th>Numero de serie</th>
-                                    	<th>Marca</th>
-                                    	<th>Modelo</th>
-                                        <th>Estado</th>
-                                        <th>Hotel</th>
-                                        <th>Categoria</th>
-                                        <th>Fecha de Registro</th>
-                                        <th>Usuario</th>
-                                        <th>Accion</th>
-                                    </thead>
-                                    <tbody>
-                                    <?php
-                                    require("../body-php/controlador/bd.php");
-                                    
-                                    $auxBuscador="";//la consulta contine texto asi que inicialmente al regexp le indicamos que busque texto
-							        if(isset($_GET['buscador'])){
-								        $auxBuscador=$_GET['buscador'];
-							        }
-
-                                    $consulta = "SELECT p.nombreP,p.serie,p.marca,p.modelo,c.categoria,p.estado,
-                                                p.hotel,p.fechaR,u.nombreU
-                                                from productos p
-                                                INNER JOIN categoria c 
-                                                    on p.fk_categoria=c.id_categoria
-                                                INNER JOIN user u 
-                                                    on p.fk_usuarioR=u.id_user
-                                                WHERE p.nombreP REGEXP '$auxBuscador'
-                                                ORDER BY nombreP ASC";
-                                                
-                                    $resultado=$conexion->query($consulta);
-
-                                    while($fila = $resultado->fetch_array()){
-                                        
-                                        echo "<tr>";
-
-                                        echo "<td>".$fila['nombreP']."</td>";  
-                                        echo "<td>".$fila['serie']."</td>"; 
-                                        echo "<td>".$fila['marca']."</td>";
-                                        echo "<td>".$fila['modelo']."</td>";
-                                        echo "<td>".$fila['estado']."</td>";
-                                        echo "<td>".$fila['hotel']."</td>";
-                                        echo "<td>".$fila['categoria']."</td>";
-                                        echo "<td>".$fila['fechaR']."</td>";
-                                        echo "<td>".$fila['nombreU']."</td>";
-                                        echo "<td>
-                                                <a href='' >
-                                                    <i class='pe-7s-pen'></i>
-                                                </a>
-                                                <i>|</i>
-                                                <a href=''>
-                                                    <i class='pe-7s-trash'></i>
-                                                </a>
-                                            </td>";
-                                        echo "</tr>"; 
-
-                                    }
-                                    $conexion->close();
-                                    ?>
-                                     
-                                    </tbody>
-                                </table>
-
                             </div>
                         </div>
                     </div>

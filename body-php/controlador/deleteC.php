@@ -5,7 +5,7 @@
     $categoria=$_GET["categoria"];
     //echo $eliminar;
             //eliminamos
-            $consulta="SELECT * FROM productos WHERE fk_categoria='$categoria'";
+            $consulta="SELECT * FROM productos WHERE fk_categoria='$id_categoria'";
             $resultado=mysqli_query($conexion, $consulta);
             if(mysqli_num_rows($resultado)==0){
                 $consulta="DELETE FROM categoria WHERE id_categoria='$id_categoria'";

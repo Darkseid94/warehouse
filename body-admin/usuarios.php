@@ -34,9 +34,9 @@
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/estilos.css">
-
 </head>
 <body class="fondo2">
+
 <div class="wrapper">
     <?php require("menuVertical.php");?>
 
@@ -47,54 +47,61 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="card">
-                            <div class="header">
-                                <h4 class="title">Reporte</h4>
+                        <div class="header">
+                                <h4 class="title">Agregar usuaruios</h4>
                             </div>
-                            <div class="content">
-                                <form action="../body-php/controlador/addProductos.php" method="post" enctype="multipart/form-data">
-                                 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Numero de serie</label>
-                                                <input type="text" name="nameP" class="form-control" required>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button type="submit" name="enviar" class="btn btn-secondary btn-fill pull-right">Agregar</button>
-                                    <div class="clearfix"></div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                            <?php                 
-                                                if(isset($_GET["mensaje"])){
-                                                    $mensaje=$_GET["mensaje"];
-                                                    echo "  
-                                                    <div class='alert alert-info'>
-                                                        <center><a href='#' class='alert-link' >".$mensaje."</a></center>
-                                                    </div>";
-                                                }
-                                            ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                </form>
+                        <div class="content">
+                            <form action="../body-php/controlador/addUser.php" method="post" enctype="multipart/form-data">
+                                  
+                                  <div class="row">
+                                          <div class="col-md-12">
+                                              <div class="form-group">
+                                                  <label>Nombre</label>
+                                                  <input type="text" name="user" class="form-control" required>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                              <div class="form-group">
+                                                  <label>Comtraseña</label>
+                                                  <input type="text" name="pwd" class="form-control" required>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <button type="submit" name="enviar" class="btn btn-secondary btn-fill pull-right">Agregar</button>
+                                      <div class="clearfix"></div>
+                                      <div class="row">
+                                          <div class="col-md-12">
+                                              <div class="form-group">
+                                              <?php                 
+                                                  if(isset($_GET["mensaje2"])){
+                                                      $mensaje2=$_GET["mensaje2"];
+                                                      echo "  
+                                                      <div class='alert alert-info'>
+                                                          <center><a href='#' class='alert-link' >".$mensaje2."</a></center>
+                                                      </div>";
+                                                  }
+                                              ?>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      
+                                  </form>
                             </div>
                         </div>
                     </div>
 
+
                     <div class="col-md-8">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Productos</h4>
                                 <?php                 
                                     if(isset($_GET["mensaje3"])){
-                                        $mensaje2=$_GET["mensaje3"];
+                                        $mensaje3=$_GET["mensaje3"];
                                              echo "  
                                                 <div class='alert alert-info'>
-                                                    <center><a href='#' class='alert-link' >".$mensaje2."</a></center>
+                                                    <center><a href='#' class='alert-link' >".$mensaje3."</a></center>
                                                 </div>";
                                     }
                                 ?>
@@ -104,7 +111,7 @@
                             <form  method='GET'>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="buscador" class="form-control" placeholder="Introduce aquí el producto que deseas buscar">
+                                        <input type="text" name="buscador" class="form-control" placeholder="Introduce aquí tu busqueda">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -120,16 +127,9 @@
                             <div class="content table-full-width">
                                 <table class="table table-hover table-striped">
                                 <tbody>
-                                        <td>Nombre de Prodcuto</td>
-                                    	<td>Numero de serie</td>
-                                    	<td>Marca</td>
-                                    	<td>Modelo</td>
-                                        <td>Estado</td>
-                                        <td>Hotel</td>
-                                        <td>Categoria</td>
-                                        <td>Fecha de Registro</td>
-                                        <td>Usuario</td>
-                                        <td>Accion</td>
+                                    	<td>Nombre</td>
+                                        <td>Acción</td>
+                                    
                                     
                                     <?php
                                     require("../body-php/controlador/bd.php");
@@ -139,43 +139,28 @@
 								        $auxBuscador=$_GET['buscador'];
 							        }
 
-                                    $consulta = "SELECT p.nombreP,p.serie,p.marca,p.modelo,c.categoria,p.estado,
-                                                p.hotel,p.fechaR,u.nombreU,p.id_producto
-                                                from productos p
-                                                INNER JOIN categoria c 
-                                                    on p.fk_categoria=c.id_categoria
-                                                INNER JOIN user u 
-                                                    on p.fk_usuarioR=u.id_user
-                                                WHERE p.nombreP REGEXP '$auxBuscador'
-                                                or p.serie REGEXP '$auxBuscador'
-                                                or p.marca REGEXP '$auxBuscador'
-                                                or p.modelo REGEXP '$auxBuscador'
-                                                ORDER BY nombreP ASC";
+                                    $consulta = "SELECT * FROM user
+                                                where 
+                                                    nombreU REGEXP '$auxBuscador'
+                                                ORDER BY nombreU ASC";
                                                 
                                     $resultado=$conexion->query($consulta);
 
                                     while($fila = $resultado->fetch_array()){
-                                        
                                         echo "<tr>";
 
-                                        echo "<td>".$fila['nombreP']."</td>";  
-                                        echo "<td>".$fila['serie']."</td>"; 
-                                        echo "<td>".$fila['marca']."</td>";
-                                        echo "<td>".$fila['modelo']."</td>";
-                                        echo "<td>".$fila['estado']."</td>";
-                                        echo "<td>".$fila['hotel']."</td>";
-                                        echo "<td>".$fila['categoria']."</td>";
-                                        echo "<td>".$fila['fechaR']."</td>";
                                         echo "<td>".$fila['nombreU']."</td>";
+                                        
                                         echo "<td>
                                                 <a href='' >
                                                     <i class='pe-7s-pen'></i>
                                                 </a>
                                                 <i>|</i>
-                                                <a href='../body-php/controlador/deleteP.php?id_producto=".$fila['id_producto']."' onclick='return eliminarV()'>
+                                                <a href=''>
                                                     <i class='pe-7s-trash'></i>
                                                 </a>
                                             </td>";
+
                                         echo "</tr>"; 
 
                                     }
@@ -203,8 +188,7 @@
 </body>
 
     <!--   Core JS Files   -->
-    
-    <script src="../js/alertas.js" type="text/javascript"></script>
+    <script src="../js/decimal.js" type="text/javascript"></script>
     <script src="assets/js/jquery.3.2.1.min.js" type="text/javascript"></script>
 	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 
