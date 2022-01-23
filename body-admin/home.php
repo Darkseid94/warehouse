@@ -127,7 +127,7 @@
                                         <td>Estado</td>
                                         <td>Hotel</td>
                                         <td>Categoria</td>
-                                        <td>Fecha de Registro</td>
+                                        <td>Fecha de Registro o modificación</td>
                                         <td>Usuario</td>
                                         <td>Accion</td>
                                     
@@ -140,7 +140,7 @@
 							        }
 
                                     $consulta = "SELECT p.nombreP,p.serie,p.marca,p.modelo,c.categoria,p.estado,
-                                                p.hotel,p.fechaR,u.nombreU,p.id_producto
+                                                p.hotel,p.fechaR,u.nombreU,p.id_producto,p.fk_categoria
                                                 from productos p
                                                 INNER JOIN categoria c 
                                                     on p.fk_categoria=c.id_categoria
@@ -168,7 +168,9 @@
                                         echo "<td>".$fila['fechaR']."</td>";
                                         echo "<td>".$fila['nombreU']."</td>";
                                         echo "<td>
-                                                <a href='' >
+                                                <a href='modP.php?id_producto=".$fila['id_producto']."&nombreP=".$fila['nombreP']."&serie=".$fila['serie']."
+                                                &marca=".$fila['marca']."&modelo=".$fila['modelo']."&estado=".$fila['estado']."&categoria=".$fila['fk_categoria']."
+                                                &hotel=".$fila['hotel']."' >
                                                     <i class='pe-7s-pen'></i>
                                                 </a>
                                                 <i>|</i>

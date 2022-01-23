@@ -152,7 +152,7 @@
                                         echo "<td>".$fila['nombreU']."</td>";
                                         
                                         echo "<td>
-                                                <a href='' >
+                                                <a href='modU.php?id_user=".$fila['id_user']."&nombreU=".$fila['nombreU']."' >
                                                     <i class='pe-7s-pen'></i>
                                                 </a>
                                                 <i>|</i>

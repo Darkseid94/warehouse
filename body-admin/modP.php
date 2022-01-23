@@ -48,11 +48,22 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Agregar Productos</h4>
+                                <h4 class="title">Modificar Productos</h4>
                             </div>
                             <div class="content">
-                                <form action="../body-php/controlador/addProductos.php" method="post" enctype="multipart/form-data">
-                                  
+                                <form action="../body-php/controlador/modProducto.php" method="post">
+                                <?php
+                                $nombreP=$_GET["nombreP"];
+                                $serie=$_GET["serie"];
+                                $marca=$_GET["marca"];
+                                $modelo=$_GET["modelo"];
+                                $estado=$_GET["estado"];
+                                $id_user=$_SESSION["idemail"];
+                                $id_producto=$_GET["id_producto"];
+                                $categoria=$_GET["categoria"];
+                                $hotel=$_GET["hotel"];
+                                
+                                ?>
                                 <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -60,10 +71,17 @@
                                                 <select name="categoria" class="form-control">
                                                 <?php
                                                     require("../body-php/controlador/bd.php");
-                                                    $consulta = "SELECT * FROM categoria ORDER BY categoria ASC";
+                                                    $consulta = "SELECT * FROM categoria";
                                                     $resultado=$conexion->query($consulta);
                                                     while($fila = $resultado->fetch_array()){
-                                                            echo "<option value='".$fila['id_categoria']."'>".$fila['categoria']."</option>";
+                                                            
+                                                                echo "<option value='".$fila['id_categoria']."'";
+                                                                if($categoria==$fila['id_categoria']){
+                                                                   echo "selected='selected'";
+                                                                }
+                                                                echo ">".$fila['categoria']."</option>";
+
+                                                            
                                                     }
                                                     $conexion->close();
                                                 ?>
@@ -75,15 +93,29 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Nombre</label>
-                                                <input type="text" name="nameP" class="form-control" required>
+                                                <input type="text" name="nameP" value="<?php echo $nombreP ?>" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Hotel</label>
-                                                <select name="hotel" class="form-control">
-                                                    <option value='Hotel trancilbania'>Hotel trancilbania</option>
-                                                    <option value='Hotel xxxxx'>Hotel xxxxx</option>
+                                               <select name="hotel" class="form-control">
+                                                <?php
+                                                            
+                                                               echo "<option value='Hotel trancilbania'";
+                                                                if($hotel=="Hotel trancilbania"){
+                                                                   echo "selected='selected'";
+                                                                }
+                                                                echo ">Hotel trancilbania</option>";
+
+                                                                echo "<option value='Hotel xxxxx'";
+                                                                if($hotel=="Hotel xxxxx"){
+                                                                   echo "selected='selected'";
+                                                                }
+                                                                echo ">Hotel xxxxx</option>";
+
+                                                
+                                                ?>
                                                 </select>
                                                 </div>
                                         </div>
@@ -92,13 +124,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Marca</label>
-                                                <input type="text" name="marca" class="form-control" required>
+                                                <input type="text" name="marca" value="<?php echo $marca ?>" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Modelo</label>
-                                                <input type="text" name="modelo" class="form-control" required>
+                                                <input type="text" name="modelo" value="<?php echo $modelo ?>" class="form-control" required>
                                                 </div>
                                         </div>
                                     </div>
@@ -106,34 +138,22 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Numero de serie</label>
-                                                <input type="text" name="ns" class="form-control" required>
+                                                <input type="text" name="ns" value="<?php echo $serie ?>" class="form-control" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Estado</label>
-                                                <input type="text" name="estado" class="form-control" required>
+                                                <input type="text" name="estado" value="<?php echo $estado ?>" class="form-control" required>
                                                 </div>
                                         </div>
                                     </div>
-
-                                    <button type="submit" name="enviar" class="btn btn-secondary btn-fill pull-right">Agregar</button>
+                                    <input type="hidden" name="id_user" value="<?php echo $id_user ?>">
+                                    <input type="hidden" name="id_producto" value="<?php echo $id_producto ?>">
+                                                
+                                    <button type="submit" name="enviar" class="btn btn-secondary btn-fill pull-right">Modificar</button>
                                     <div class="clearfix"></div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                            <?php                 
-                                                if(isset($_GET["mensaje"])){
-                                                    $mensaje=$_GET["mensaje"];
-                                                    echo "  
-                                                    <div class='alert alert-info'>
-                                                        <center><a href='#' class='alert-link' >".$mensaje."</a></center>
-                                                    </div>";
-                                                }
-                                            ?>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
                                     
                                 </form>
                             </div>
