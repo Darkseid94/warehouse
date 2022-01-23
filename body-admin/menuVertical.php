@@ -29,7 +29,7 @@
                 </li>
                 <li class="active">
                     <a href="categoria.php">
-                        <i class="pe-7s-shopbag"></i>
+                        <i class="pe-7s-network"></i>
                         <p>Categoria</p>
                     </a>
                 </li>

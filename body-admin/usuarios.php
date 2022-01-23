@@ -156,7 +156,7 @@
                                                     <i class='pe-7s-pen'></i>
                                                 </a>
                                                 <i>|</i>
-                                                <a href=''>
+                                                <a href='../body-php/controlador/deleteU.php?id_user=".$fila['id_user']."&nombreU=".$fila['nombreU']."'>
                                                     <i class='pe-7s-trash'></i>
                                                 </a>
                                             </td>";
